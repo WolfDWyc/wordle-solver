@@ -13,6 +13,12 @@ answers.sort()
 guesses = list(set(answers + [guess.strip()for guess in open(f"{ASSETS_DIR}\\guesses.txt", encoding="utf-8").readlines()]))
 guesses.sort()
 
+letters = []
+for answer in answers:
+    for letter in answer:
+        if letter not in letters:
+            letters.append(letter)
+letters.sort()
 
 def input_guess(guess, answer):
     colors = []
@@ -66,10 +72,8 @@ class Turn:
 
 def create_data(remaining, progress=True):
     master = defaultdict(dict)
-
-    if progress: pbar = tqdm(total=26)
-    # for letter in "אבגדהוזחטיכלמנסעפצקרשת":
-    for letter in "abcdefghijklmnopqrstuvwxyz":
+    if progress: pbar = tqdm(total=len(letters))
+    for letter in letters:
         if progress: pbar.update(n=1)
         for position in range(5):
             master[letter][position] = defaultdict(dict)

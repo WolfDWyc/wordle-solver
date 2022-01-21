@@ -4,20 +4,16 @@ from collections import defaultdict
 
 from tqdm import tqdm
 
-LANGUAGE = "english"
+LANGUAGE = "hebrew"
 ASSETS_DIR = f"assets\\{LANGUAGE}"
 
 answers = [answer.strip() for answer in open(f"{ASSETS_DIR}\\answers.txt", encoding="utf-8").readlines()]
 answers.sort()
 
-guesses = list(set(answers + [guess.strip()for guess in open(f"{ASSETS_DIR}\\guesses.txt", encoding="utf-8").readlines()]))
+guesses = list(set(answers + [guess.strip() for guess in open(f"{ASSETS_DIR}\\guesses.txt", encoding="utf-8").readlines()]))
 guesses.sort()
 
-letters = []
-for answer in answers:
-    for letter in answer:
-        if letter not in letters:
-            letters.append(letter)
+letters = [letter.strip() for letter in open(f"{ASSETS_DIR}\\letters.txt", encoding="utf-8").readlines()]
 letters.sort()
 
 def input_guess(guess, answer):

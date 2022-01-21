@@ -44,9 +44,10 @@ When editing the main `./src/wordle.py` file, open a new branch and make your ch
 
 ## Adding new languages
 1. Create a new directory in `./assets` with the name of the language you want to add in snake_case.
-2. Create 2 files in that directory:
+2. Create 3 files in that directory:
     - `guesses.txt` - Lowercase, newline separated list of the available words to guess.
-    - `.answers.txt` - Lowercase, newline separated list of the possible answers to the puzzle.
+    - `answers.txt` - Lowercase, newline separated list of the possible answers to the puzzle.
+    - `letters.txt` - Lowercase, newline separated list of the possible letters that could appear in a guess or answer.
 # Disclaimer
 
 `./src/play.py` does not work perfectly for answers with repeating letters yet.

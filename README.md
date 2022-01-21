@@ -20,11 +20,15 @@ pip install -r requirements.txt
 
 ## Adding scenarios
 
-Simply create a new file in `./src` and import what you need from the main `./src/wordle.py` file: 
+Simply create a new file in `./src` and import what you need from the main `./src/wordle.py` file.
+
+Examples:
+- Probably all you'll need:
 ```python
-# Probably all you'll need:
 from wordle import get_best_word, input_guess, create_data, Turn, answers, guesses
-# Less recommended:
+```
+-  Less recommended:
+```python
 from wordle import *
 ```
 
@@ -32,6 +36,17 @@ from wordle import *
 
 When editing the main `./src/wordle.py` file, open a new branch and make your changes there. To merge your changes into the master branch, open a pull request and wait for approval first.
 
+# Languages
+
+## Supported languages
+- English
+- Hebrew
+
+## Adding new languages
+1. Create a new directory in `./assets` with the name of the language you want to add in snake_case.
+2. Create 2 files in that directory:
+    - `guesses.txt` - Lowercase, newline separated list of the available words to guess.
+    - `.answers.txt` - Lowercase, newline separated list of the possible answers to the puzzle.
 # Disclaimer
 
 `./src/play.py` does not work perfectly for answers with repeating letters yet.

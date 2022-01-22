@@ -132,3 +132,4 @@ dmypy.json
 data.json
 scores.json
 avg_scores.json
+results.json

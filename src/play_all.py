@@ -18,21 +18,22 @@ def play(answer, progress=False, best_word="roate"):
     # print(f"Solved {answer} in {guess_count + 1} guesses")
     return guess_count + 1
 
+# k = 100
+# games = random.sample(answers, k=k)
+games = answers
+
+pbar = tqdm(total=len(answers))
+
 results = []
 def add(result):
     results.append(result)
-    
-    print(f"Finished {len(results)} games, with a total of {sum(results)} guesses and an average of {sum(results)/len(results)}")
+    pbar.update(n=1)
 
 if __name__ == '__main__':
     # games = ["favor"]
-    k = 100
-    games = random.sample(answers, k=k)
-
-
     pool = mp.Pool(mp.cpu_count())
     for i, answer in enumerate(games):
-        pool.apply_async(play, args=(answer,False, "soare"), callback=add)
+        pool.apply_async(play, args=(answer,False, "המיות"), callback=add)
         # guess_count = play(answer)
         # results[answer] = guess_count
         # print(f"After {i+1} turns, the average is {sum(results.values())/(i+1)}")
@@ -44,4 +45,4 @@ if __name__ == '__main__':
     pool.close()
     pool.join()
 
-    print(results)
+    print(sum(results)/len(results))

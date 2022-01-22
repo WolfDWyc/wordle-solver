@@ -1,18 +1,19 @@
-from wordle import *
+from wordle import Turn, create_data, GUESSES, ANSWERS, input_guess
+from tqdm import tqdm
 
 if __name__ == "__main__":
     perms = []
-    for i in range(len(guesses)):
-        for j in range(i+1, len(guesses)):
-            perms.append((guesses[i], guesses[j]))
+    for i in range(len(GUESSES)):
+        for j in range(i+1, len(GUESSES)):
+            perms.append((GUESSES[i], GUESSES[j]))
     print(len(perms))
 
-    turn = Turn(create_data(answers, progress=False))
-    for answer in answers:
+    turn = Turn(create_data(ANSWERS, progress=False))
+    for answer in ANSWERS:
 
         pbar = tqdm(total=len(perms))
         remainings = {}
-        for guess in guesses:
+        for guess in GUESSES:
             remainings[guess] = turn.get_remaining(input_guess(guess, answer))
 
         next_perms = []

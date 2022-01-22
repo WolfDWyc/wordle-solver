@@ -1,12 +1,12 @@
 import multiprocessing as mp
-import random
+from tqdm import tqdm
 
-from wordle import *
+from wordle import Turn, create_data, get_best_word, ANSWERS, input_guess
 
 
 def play(answer, progress=False, best_word="roate"):
     guess_count = 0
-    remaining = answers
+    remaining = ANSWERS
     while best_word != answer and len(remaining) > 1:
         if guess_count == 6:
             return -1
@@ -20,9 +20,9 @@ def play(answer, progress=False, best_word="roate"):
 
 # k = 100
 # games = random.sample(answers, k=k)
-games = answers
+games = ANSWERS
 
-pbar = tqdm(total=len(answers))
+pbar = tqdm(total=len(ANSWERS))
 
 results = []
 def add(result):

@@ -1,10 +1,10 @@
-from wordle import *
+from wordle import Turn, create_data, get_best_word, ANSWERS
 
 
 if __name__ == "__main__":
     print("DISCLAIMER: Does not work perfectly for answers with repeating letters yet.")
 
-    remaining = answers
+    remaining = ANSWERS
 
     while True:
         feedback = input("Enter feedback from wordle (Format: letter0color letter1color...):\n").split(" ")

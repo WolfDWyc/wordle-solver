@@ -7,14 +7,16 @@ from tqdm import tqdm
 LANGUAGE = "hebrew"
 ASSETS_DIR = f"assets\\{LANGUAGE}"
 
-answers = [answer.strip() for answer in open(f"{ASSETS_DIR}\\answers.txt", encoding="utf-8").readlines()]
-answers.sort()
+ANSWERS = [answer.strip() for answer in
+             open(f"{ASSETS_DIR}\\answers.txt", encoding="utf-8").readlines()]
+ANSWERS.sort()
 
-guesses = list(set(answers + [guess.strip() for guess in open(f"{ASSETS_DIR}\\guesses.txt", encoding="utf-8").readlines()]))
-guesses.sort()
+GUESSES = list(set(ANSWERS + [guess.strip() for guess in
+             open(f"{ASSETS_DIR}\\guesses.txt", encoding="utf-8").readlines()]))
+GUESSES.sort()
 
-letters = [letter.strip() for letter in open(f"{ASSETS_DIR}\\letters.txt", encoding="utf-8").readlines()]
-letters.sort()
+LETTERS = [letter.strip() for letter in open(f"{ASSETS_DIR}\\letters.txt", encoding="utf-8").readlines()]
+LETTERS.sort()
 
 def input_guess(guess, answer):
     colors = []
@@ -68,8 +70,8 @@ class Turn:
 
 def create_data(remaining, progress=True):
     master = defaultdict(dict)
-    if progress: pbar = tqdm(total=len(letters))
-    for letter in letters:
+    if progress: pbar = tqdm(total=len(LETTERS))
+    for letter in LETTERS:
         if progress: pbar.update(n=1)
         for position in range(5):
             master[letter][position] = defaultdict(dict)
@@ -94,10 +96,10 @@ def get_best_word(remaining, save_scores=True, save_data=True, progress=True):
     if save_data:
         with open("data.json", "w", encoding="utf-8") as f:
             json.dump(turn.data, f, indent=4, ensure_ascii=False, default=list)
-    if progress: pbar = tqdm(total=len(guesses))
+    if progress: pbar = tqdm(total=len(GUESSES))
     
     scores = {}
-    for guess in guesses:
+    for guess in GUESSES:
         if progress: pbar.update(n=1)
         score = 0
         for answer in remaining:
@@ -125,4 +127,4 @@ def get_best_word(remaining, save_scores=True, save_data=True, progress=True):
 
 
 if __name__ == '__main__':
-    print(get_best_word(answers))
+    print(get_best_word(ANSWERS))

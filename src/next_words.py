@@ -2,9 +2,9 @@ from wordle import *
 
 if __name__ == "__main__":
 
-    first_turn = Turn(create_data(answers, progress=False))
+    first_turn = Turn(create_data(ANSWERS, progress=False))
     remainings = {}
-    for answer in answers:
+    for answer in ANSWERS:
         feedback_0 = input_guess("roate", answer)
         feedback_1 = input_guess("linds", answer)
         feedback = (*feedback_0, *feedback_1)
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         for word, score in scores.items():
             avg_scores[word] += score * remaining["count"]
 
-    avg_scores = {k: v/len(answers) for k, v in sorted(avg_scores.items(), key=lambda item: item[1])}
+    avg_scores = {k: v/len(ANSWERS) for k, v in sorted(avg_scores.items(), key=lambda item: item[1])}
     with open("avg_scores.json", "w", encoding="utf-8") as file:
         json.dump(avg_scores, file, indent=4, ensure_ascii=False)
 
